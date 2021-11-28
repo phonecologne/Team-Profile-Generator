@@ -69,8 +69,36 @@ const addManager = () => {
         const { name, id, emai, officeNumber } = managerInput;
         const manager = new Manager (name, id, email, officeNumber);
 
-        team Array.push(manager);
+        teamArray.push(manager);
         console.log(manager);
     })
 };
 
+const addEmployee = () => {
+    console.log(`
+//now we add the employees to this list
+    `);
+
+    return inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'role',
+            message: "Please input the employees role",
+            choices: ['Enginner', 'Intern']
+        },
+        {
+            type: 'input',
+            name: 'name',
+            message: "Please input the full name of the employee. Please include the nickname if any for this employee.",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log ("Please enter the name for each employee! We can not skip this step!");
+                    return false;
+                }
+            }
+        },
+        
+    ])
+}
