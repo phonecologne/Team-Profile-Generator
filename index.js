@@ -52,7 +52,25 @@ const addManager = () => {
             }
         },
         {
-            
-        }
+            type: 'input',
+            name: 'officeNumber',
+            message: "Now lets include the office location and floor number for the managers office or workplace. If the manager is working from home please write REMOTE with the timezone for the manager.",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.log ('Please input your managers location! We want a through description of the team and that includes the location of the manager!')
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }       
     ])
-}
+    .then(mangerInput => {
+        const { name, id, emai, officeNumber } = managerInput;
+        const manager = new Manager (name, id, email, officeNumber);
+
+        team Array.push(manager);
+        console.log(manager);
+    })
+};
+
