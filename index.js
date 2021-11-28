@@ -6,6 +6,7 @@ const Intern = require('./lib/Intern');
 
 const fs = require('fs');
 const inquirer = require('inquirer');
+const { ConnectableObservable } = require('rxjs');
 
 const teamArray = [];
 
@@ -46,7 +47,7 @@ const addManager = () => {
                 if (valid) {
                     return true;
                 } else {
-                    console.log ('Its important to enter the managers email address. If anyone needs to reach out to the manager having the email listed here will prevent roadblocks in communications!')
+                    console.log('Its important to enter the managers email address. If anyone needs to reach out to the manager having the email listed here will prevent roadblocks in communications!')
                     return false;
                 }
             }
@@ -57,21 +58,21 @@ const addManager = () => {
             message: "Now lets include the office location and floor number for the managers office or workplace. If the manager is working from home please write REMOTE with the timezone for the manager.",
             validate: nameInput => {
                 if (isNaN(nameInput)) {
-                    console.log ('Please input your managers location! We want a through description of the team and that includes the location of the manager!')
+                    console.log('Please input your managers location! We want a through description of the team and that includes the location of the manager!')
                     return false;
                 } else {
                     return true;
                 }
             }
-        }       
+        }
     ])
-    .then(mangerInput => {
-        const { name, id, emai, officeNumber } = managerInput;
-        const manager = new Manager (name, id, email, officeNumber);
+        .then(mangerInput => {
+            const { name, id, emai, officeNumber } = managerInput;
+            const manager = new Manager(name, id, email, officeNumber);
 
-        teamArray.push(manager);
-        console.log(manager);
-    })
+            teamArray.push(manager);
+            console.log(manager);
+        })
 };
 
 const addEmployee = () => {
@@ -79,7 +80,7 @@ const addEmployee = () => {
 //now we add the employees to this list
     `);
 
-    return inquirer.prompt ([
+    return inquirer.prompt([
         {
             type: 'list',
             name: 'role',
@@ -94,8 +95,48 @@ const addEmployee = () => {
                 if (nameInput) {
                     return true;
                 } else {
-                    console.log ("Please enter the name for each employee! We can not skip this step!");
+                    console.log("Please enter the name for each employee! We can not skip this step!");
                     return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "Please enter the employee ID. Please include all numbers and letters!",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.log("Please include the employee ID! Its very important to include this!")
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Now please input the employees email address",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                    return true;
+                } else {
+                    console.log ("Please include an email for the employee! Having contanct information for an employee helps the team and stops roadblocks in communcation!")
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "Please input the employees GitHub username.",
+            when: (input) => input.role === "Engineer",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log ("Please enter the employee's GitHub username. If the employee does not have a GitHub, please enter XXXXX or NONE.")
                 }
             }
         },
