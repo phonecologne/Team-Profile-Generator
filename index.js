@@ -143,7 +143,44 @@ const addEmployee = () => {
         {
             type: 'input',
             name: 'school',
-            message: "Ok, now we need to input your Intern's college, univeristy or school. Please include graduation year if you have that information."
+            message: "Ok, now we need to input your Intern's college, univeristy or school. Please include graduation year if you have that information.",
+            when: (input) => input.role === "Intern",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log ("Please dont forget to input the name of the Intern's school, university or college in this field! If you do not have the graduation year that is OK.")
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAddEmployee',
+            message: "Would you like to add more team members to this group?",
+            default: false
         }
     ])
-}
+    .then(employeeData => {
+        let { name, id, email, role, github, school, confirmAddEmployee } = employeeData;
+        let employee;
+
+        if (role === "Engineer") {
+            employee = new Engineet (name, id, email, github);
+
+            console.log(employee);
+
+        } else if (role === "Intern") {
+            employee = new Intern (name, id, email, school);
+
+            console.log(employee);
+        }
+
+        teamArray.push(employee);
+
+        if (confirmAddEmployee) {
+            return addEmployee(teamArray);
+        } else {
+            return teamArray;
+        }
+    })
+};
