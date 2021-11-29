@@ -140,6 +140,10 @@ const addEmployee = () => {
                 }
             }
         },
-        
+        {
+            type: 'input',
+            name: 'school',
+            message: "Ok, now we need to input your Intern's college, univeristy or school. Please include graduation year if you have that information."
+        }
     ])
 }
