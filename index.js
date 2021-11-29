@@ -184,3 +184,15 @@ const addEmployee = () => {
         }
     })
 };
+
+const writeFile = data => {
+    fs.writeFile('./direct/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Whoo! We have finished creating your teams set up page! Please check out the INDEX HTML file!")
+        }
+    })
+};
+
