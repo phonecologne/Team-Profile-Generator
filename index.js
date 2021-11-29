@@ -122,7 +122,7 @@ const addEmployee = () => {
                 if (valid) {
                     return true;
                 } else {
-                    console.log ("Please include an email for the employee! Having contanct information for an employee helps the team and stops roadblocks in communcation!")
+                    console.log("Please include an email for the employee! Having contanct information for an employee helps the team and stops roadblocks in communcation!")
                     return false;
                 }
             }
@@ -136,7 +136,7 @@ const addEmployee = () => {
                 if (nameInput) {
                     return true;
                 } else {
-                    console.log ("Please enter the employee's GitHub username. If the employee does not have a GitHub, please enter XXXXX or NONE.")
+                    console.log("Please enter the employee's GitHub username. If the employee does not have a GitHub, please enter XXXXX or NONE.")
                 }
             }
         },
@@ -149,7 +149,7 @@ const addEmployee = () => {
                 if (nameInput) {
                     return true;
                 } else {
-                    console.log ("Please dont forget to input the name of the Intern's school, university or college in this field! If you do not have the graduation year that is OK.")
+                    console.log("Please dont forget to input the name of the Intern's school, university or college in this field! If you do not have the graduation year that is OK.")
                 }
             }
         },
@@ -160,29 +160,29 @@ const addEmployee = () => {
             default: false
         }
     ])
-    .then(employeeData => {
-        let { name, id, email, role, github, school, confirmAddEmployee } = employeeData;
-        let employee;
+        .then(employeeData => {
+            let { name, id, email, role, github, school, confirmAddEmployee } = employeeData;
+            let employee;
 
-        if (role === "Engineer") {
-            employee = new Engineet (name, id, email, github);
+            if (role === "Engineer") {
+                employee = new Engineet(name, id, email, github);
 
-            console.log(employee);
+                console.log(employee);
 
-        } else if (role === "Intern") {
-            employee = new Intern (name, id, email, school);
+            } else if (role === "Intern") {
+                employee = new Intern(name, id, email, school);
 
-            console.log(employee);
-        }
+                console.log(employee);
+            }
 
-        teamArray.push(employee);
+            teamArray.push(employee);
 
-        if (confirmAddEmployee) {
-            return addEmployee(teamArray);
-        } else {
-            return teamArray;
-        }
-    })
+            if (confirmAddEmployee) {
+                return addEmployee(teamArray);
+            } else {
+                return teamArray;
+            }
+        })
 };
 
 const writeFile = data => {
@@ -196,3 +196,14 @@ const writeFile = data => {
     })
 };
 
+addManager()
+    .then(addEmployee)
+    .then(teamArray => {
+        return generateHTML(teamArray);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .catch(err => {
+        console.log(err);
+    });
