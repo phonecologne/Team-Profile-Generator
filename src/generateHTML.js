@@ -36,3 +36,22 @@ const generateEngineer = function (engineer) {
     `
 }
 
+const generateIntern = function (intern) {
+    return `
+    <div class="col-4 mt-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h3>${intern.name}</h3>
+                <h4>Intern</h4><i class="material-icon">assignment_ind</i>
+            </div>
+
+            <div class="card-body">
+                <p class="id">ID: ${intern.id}</p>
+                <p class="email">Email:<a href="mailto:${intern.mail}">${intern.email}</a></p>
+                <p class="school">College/Univeristy/School: ${intern.school}</p>
+            </div>
+        </div>
+    </div>
+    `
+};
+
