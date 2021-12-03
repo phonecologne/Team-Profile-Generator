@@ -77,10 +77,12 @@ const addManager = () => {
             console.log(manager);
         })
 };
-
+//now we add the employees to this list
 const addEmployee = () => {
     console.log(`
-//now we add the employees to this list
+    =================
+    Now We Should Add All the Employees to the Team!
+    =================
     `);
 
     return inquirer.prompt([
@@ -163,6 +165,7 @@ const addEmployee = () => {
             default: false
         }
     ])
+    //the information for employees non managers data
         .then(employeeData => {
             let { name, id, email, role, github, school, confirmAddEmployee } = employeeData;
             let employee;
@@ -188,6 +191,7 @@ const addEmployee = () => {
         })
 };
 
+//this function will create a HTML file with all the inputted data for the teams orginazation after the ELSE console log the file has been created successfully
 const writeFile = data => {
     fs.writeFile('./direct/index.html', data, err => {
         if (err) {
