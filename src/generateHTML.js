@@ -55,3 +55,25 @@ const generateIntern = function (intern) {
     `
 };
 
+generateHTML = (data) => {
+    pageArray = [];
+
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
+        const role = employee.getRole();
+
+        if (role === 'Manager') {
+            const managerCard = generateManager(employee);
+
+            pageArray.push(managerCard);
+        }
+
+        if (role === 'Engineer') {
+            const engineeCard = generateEngineed(employee);
+
+            pageArray.push(engineerCard);
+        }
+    }
+
+    
+}
