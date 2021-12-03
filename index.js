@@ -1,15 +1,18 @@
 const generateHTML = require('./src/generateHTML');
 
+//the members who will be apart of the team page
 const Manager = require('./lib/Manager');
 const Enginner = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+//Node JS modules and the require command forces the user to use so the javascript can run
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { ConnectableObservable } = require('rxjs');
 
 const teamArray = [];
 
+//first prompt for adding the manager to the team profile
 const addManager = () => {
     return inquirer.prompt([
         {
