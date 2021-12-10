@@ -15,6 +15,9 @@ This NODE.JS accessed JavaScript application can help users by taking their answ
 ## Installation 
 If you would like to use this project for yourself, please clone the repository from GitHub and you will also need to download NODE.JS and download Inquirer.
 
+## Visual Demo
+![demo](https://user-images.githubusercontent.com/88611613/145521448-c7038f17-25e9-4b1c-8d64-d0dbceac80e7.gif)
+
 ## Getting Started
 Use the terminal from your VSCode by typing "index node" AFTER you have downloaded NODE.JS and Inquirer from NODE.JS. Answer all the questions and at the end you will get a HTML file for your team profile with team members.
 
